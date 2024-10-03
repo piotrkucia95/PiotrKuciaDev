@@ -1,0 +1,40 @@
+<!--
+ - Created by Piotr Kucia on 19.07.2018.
+ -->
+
+<apex:component controller="A18_VFC_AssetController">
+
+    <apex:pageBlock >
+        <apex:pageBlockTable id="AssetListTable" value="{!assets}" var="a" columns="6" rendered="true" >
+            <apex:column headerValue="Name">
+                <apex:outputText value="{!a.name}" />
+            </apex:column>
+            <apex:column headerValue="Description">
+                <apex:outputText value="{!a.description}" />
+            </apex:column>
+            <apex:column headerValue="Due Date">
+                <apex:outputText value="{0,date,MM/dd/yyyy}" >
+                    <apex:param value="{!a.dueDate}" />
+                </apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Invoice Number">
+                <apex:param value="{!a.invoiceNumber}" />
+            </apex:column>
+            <apex:column headerValue="Price">
+                <apex:param value="{!a.price}" />
+            </apex:column>
+            <apex:column headerValue="Purchase Date">
+                <apex:outputText value="{0,date,MM/dd/yyyy}" >
+                    <apex:param value="{!a.purchaseDate}" />
+                </apex:outputText>
+            </apex:column>
+        </apex:pageBlockTable>
+
+        <!-- <apex:panelGrid columns="5">
+                <apex:commandLink action="{!previous}" rerender="AssetListTable">Previous</apex:commandlink>
+                <apex:commandLink action="{!next}" rerender="AssetListTable">Next</apex:commandlink>
+        </apex:panelGrid>
+        <!-- <p><apex:outputText value="Page {!pageNumber} " />of<apex:outputText value=" {!totalPages}" /></p> -->
+    </apex:pageBlock>
+
+</apex:component>

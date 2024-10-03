@@ -1,0 +1,54 @@
+<!--
+ - Created by Piotr Kucia on 04.08.18.
+ -->
+
+<aura:component description="A18_AssetTrackerAssetForm">
+    <aura:attribute name="newAsset" type="Map" default="{'isBroken': false}"/>
+    <aura:attribute name="assetAddedFlag" type="Boolean" default="false"/>
+    <aura:attribute name="assetErrorFlag" type="Boolean" default="false"/>
+
+    <aura:method name="handleAddAsset" action="{!c.handleAddAsset}" access="PUBLIC"></aura:method>
+    <aura:method name="handleEditAsset" action="{!c.handleEditAsset}" access="PUBLIC"></aura:method>
+    <aura:method name="handleCancel" action="{!c.clickCancel}" access="PUBLIC"></aura:method>
+    <aura:method name="notifySuccess" action="{!c.notifySuccess}" access="PUBLIC"></aura:method>
+    <aura:method name="notifyError" action="{!c.notifyError}" access="PUBLIC"></aura:method>
+
+    <aura:registerEvent name="addAsset" type="c:A18_AssetTrackerAddAssetEvent"/>
+    <aura:registerEvent name="editAsset" type="c:A18_AssetTrackerEditAssetEvent"/>
+
+    <h3 class="{!v.assetAddedFlag == true ? 'slds-text-color_success slds-text-align_center' : 'slds-assistive-text'}">
+        Asset added successfully!</h3>
+    <h3 class="{!v.assetErrorFlag == true ? 'slds-text-color_error slds-text-align_center' : 'slds-assistive-text'}">
+        Error occured!</h3>
+    <br/>
+    <form class="slds-form--stacked">
+        <lightning:input aura:id="assetform" label="Asset Name"
+                         name="assetname"
+                         value="{!v.newAsset.name}"
+                         required="true"/>
+        <lightning:input aura:id="assetform" label="Description"
+                         name="assetdescription"
+                         value="{!v.newAsset.description}"/>
+        <lightning:input type="date" aura:id="assetform" label="Due Date"
+                         name="assetduedate"
+                         value="{!v.newAsset.dueDate}"/>
+        <lightning:input aura:id="assetform" label="Invoice Number"
+                         name="assetinvoicenumber"
+                         value="{!v.newAsset.invoiceNumber}"/>
+        <lightning:input type="number" aura:id="assetform" label="Price"
+                         name="assetprice"
+                         formatter="currency"
+                         step="1"
+                         value="{!v.newAsset.price}" />
+        <lightning:input type="date" aura:id="assetform" label="Purchase Date"
+                         name="assetpurchasedate"
+                         value="{!v.newAsset.purchaseDate}"/>
+        <lightning:input type="toggle"
+                         aura:id="assetform"
+                         label="Is Broken?"
+                         name="broken"
+                         messageToggleActive="Yes"
+                         messageToggleInactive="No"
+                         checked="{!v.newAsset.isBroken}"/>
+    </form>
+</aura:component>

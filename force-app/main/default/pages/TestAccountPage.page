@@ -1,0 +1,16 @@
+<apex:page controller="TestEmailService">
+    <div id="test">
+        Piotr
+    </div>
+    Time1: {!t1} <br/><br/>
+	Time-Transient: {!t2} <br/><br/>
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"/>
+	<apex:form >
+		<apex:commandLink value="Refresh"/>
+    	<br/>
+		<apex:commandLink action="{!refreshT1}" value="Refresh t1"/>  
+	</apex:form>
+    <script>
+    	console.log($('#test'));
+    </script>
+</apex:page>

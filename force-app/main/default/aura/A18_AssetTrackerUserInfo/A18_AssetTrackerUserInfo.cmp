@@ -1,0 +1,21 @@
+<!--
+ - Created by Piotr Kucia on 23.07.2018.
+ -->
+
+<aura:component description="A18_AssetTrackerUserInfo">
+    <aura:attribute name="user" type="User" />
+    <aura:attribute name="userType" type="String" />
+
+    <lightning:layout class="slds-grid--vertical-align-center slds-float--right">
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h4>{!v.user.FirstName}&nbsp;{!v.user.LastName}</h4>
+                <p>{!v.userType}</p>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem>
+            <lightning:icon iconName="standard:user" alternativeText="User Info"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+</aura:component>

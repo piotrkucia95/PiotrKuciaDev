@@ -1,0 +1,7 @@
+<!--
+ - Created by Piotr Kucia on 23.07.2018.
+ -->
+
+<aura:event type="COMPONENT">
+    <aura:attribute name="newAsset" type="Map"/>
+</aura:event>

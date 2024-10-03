@@ -1,0 +1,7 @@
+<!--
+ - Created by Piotr Kucia on 09.08.18.
+ -->
+
+<aura:event type="COMPONENT" description="A18_AssetTrackerAssetSelectedEvent">
+    <aura:attribute name="recordByEvent" type="sObject"/>
+</aura:event>

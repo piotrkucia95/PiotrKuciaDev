@@ -1,0 +1,29 @@
+/**
+ * Created by Piotr Kucia on 07.08.18.
+ */
+.THIS {
+    text-align: left;
+}
+
+h1.THIS {
+    margin-bottom: 50px;
+    font-size: 50px;
+}
+
+p.THIS {
+    font-size: 20px;
+}
+
+button.THIS {
+    width: 30%;
+    min-height: 10vh;
+    margin-top: 50px;
+}
+
+@media (max-width: 600px) {
+  button.THIS {
+    width: 70%;
+    min-height: 10vh;
+    margin-top: 50px;
+  }
+}

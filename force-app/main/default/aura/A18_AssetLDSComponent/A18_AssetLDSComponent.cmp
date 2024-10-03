@@ -1,0 +1,68 @@
+<!--
+ - Created by Piotr Kucia on 24.07.2018.
+ -->
+
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+
+    <aura:attribute name="newAsset" type="Object"/>
+    <aura:attribute name="simpleNewAsset" type="Object"/>
+    <aura:attribute name="newAssetError" type="String"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <force:recordData aura:id="assetRecordCreator"
+                      layoutType="FULL"
+                      targetRecord="{!v.newAsset}"
+                      targetFields="{!v.simpleNewAsset}"
+                      targetError="{!v.newAssetError}" />
+
+    <!-- Display the new asset form -->
+    <fieldset class="slds-box slds-theme--default slds-container--small slds-align_absolute-center">
+        <legend id="newassetform" class="slds-text-heading--small
+            slds-p-vertical--medium">
+            Add Asset
+        </legend>
+        <div>
+            <form class="slds-form--stacked">
+                <lightning:input aura:id="assetform" label="Asset Name"
+                                 name="assetname"
+                                 value="{!v.simpleNewAsset.Name}"
+                                 required="true"/>
+                <lightning:input aura:id="assetform" label="Description"
+                                 name="assetdescription"
+                                 value="{!v.simpleNewAsset.Description__c}"/>
+                <lightning:input type="date" aura:id="assetform" label="Due Date"
+                                 name="assetduedate"
+                                 value="{!v.simpleNewAsset.Due_Date__c}"/>
+                <lightning:input aura:id="assetform" label="Invoice Number"
+                                 name="assetinvoicenumber"
+                                 value="{!v.simpleNewAsset.Invoice_Number__c}"/>
+                <lightning:input type="number" aura:id="assetform" label="Price"
+                                 name="assetprice"
+                                 formatter="currency"
+                                 step="1"
+                                 value="{!v.simpleNewAsset.Price__c}" />
+                <lightning:input type="date" aura:id="assetform" label="Purchase Date"
+                                 name="assetpurchasedate"
+                                 value="{!v.simpleNewAsset.Purchase_Date__c}"/>
+            </form>
+            <br/>
+            <lightning:button label="Add Asset"
+                              class="slds-m-top--medium"
+                              variant="brand"
+                              onclick="{!c.handleSaveAsset}"/>
+
+            <lightning:button label="Cancel"
+                              class="slds-m-top--medium"
+                              variant="brand"
+                              onclick="{!c.clickCancel}"/>
+        </div>
+    </fieldset>
+
+    <!-- Display Lightning Data Service errors -->
+    <aura:if isTrue="{!not(empty(v.newAssetError))}">
+        <div class="recordError">
+                {!v.newAssetError}</div>
+    </aura:if>
+
+</aura:component>

@@ -1,0 +1,22 @@
+<!--
+ - Created by Piotr Kucia on 23.07.2018.
+ -->
+
+<aura:component description="A18_AssetFormHeader">
+    <aura:attribute name="user" type="User" />
+    <aura:attribute name="userType" type="String" />
+
+        <lightning:layout class="slds-page-header slds-page-header--object-home">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:user" alternativeText="User Info"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h2 class="slds-text-heading--medium">{!v.user.FirstName}&nbsp;{!v.user.LastName}</h2>
+                    <h1 class="slds-text-heading--small">{!v.user.Email}</h1>
+                    <h1 class="slds-text-heading--small">{!v.userType}</h1>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+
+</aura:component>

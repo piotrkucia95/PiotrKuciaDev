@@ -1,0 +1,39 @@
+<!--
+ - Created by Piotr Kucia on 19.07.2018.
+ <apex:pageBlockTable id="AssetListTable" value="{!assets}" var="a" columns="6" rendered="true" >
+ -->
+
+<apex:component controller="A18_VFC_AssetController">
+
+    <apex:pageBlock id="myPanel">
+        <apex:pageBlockTable id="AssetListTable" value="{!assets}" var="a" columns="7" rendered="true" >
+            <apex:column headerValue="Name">
+                <apex:outputText value="{!a.name}" />
+            </apex:column>
+            <apex:column headerValue="Description">
+                <apex:outputText value="{!a.description}" />
+            </apex:column>
+            <apex:column headerValue="Due Date">
+                <apex:outputText value="{0,date,MM/dd/yyyy}" >
+                    <apex:param value="{!a.dueDate}" />
+                </apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Invoice Number">
+                <apex:param value="{!a.invoiceNumber}" />
+            </apex:column>
+            <apex:column headerValue="Price">
+                <apex:param value="{!a.price}" />
+            </apex:column>
+            <apex:column headerValue="Purchase Date">
+                <apex:outputText value="{0,date,MM/dd/yyyy}" >
+                    <apex:param value="{!a.purchaseDate}" />
+                </apex:outputText>
+            </apex:column>
+            <apex:column headerValue="More">
+                <apex:commandbutton value="Details"
+                                    onclick="window.location='https://eu10.lightning.force.com/lightning/r/Asset__c/{!a.id}/view'; return false;"/>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+
+</apex:component>

@@ -1,0 +1,21 @@
+<!--
+ - Created by Piotr Kucia on 23.07.2018.
+ -->
+
+<aura:component description="A18_AssetFormFooter">
+    <aura:attribute name="newAsset" type="Map" default=""/>
+
+    <aura:registerEvent name="addAsset" type="c:A18_AddAssetEvent"/>
+
+    <div>
+        <lightning:button label="Add Asset"
+                          class="slds-m-top--medium"
+                          variant="brand"
+                          onclick="{!c.clickAdd}"/>
+
+        <lightning:button label="Cancel"
+                          class="slds-m-top--medium"
+                          variant="brand"
+                          onclick="{!c.clickCancel}"/>
+    </div>
+</aura:component>

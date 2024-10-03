@@ -1,0 +1,7 @@
+<!--
+ - Created by Polsource on 02.08.2018.
+ -->
+
+<aura:event type="COMPONENT" description="A18_AssetTrackerAssetBrokenEvent">
+    <aura:attribute name="asset" type="Object"/>
+</aura:event>

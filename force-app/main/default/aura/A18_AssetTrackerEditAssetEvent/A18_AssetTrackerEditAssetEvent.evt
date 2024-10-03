@@ -1,0 +1,7 @@
+<!--
+ - Created by pkucia on 05.08.18.
+ -->
+
+<aura:event type="COMPONENT" description="A18_AssetTrackerEditAssetEvent">
+    <aura:attribute name="newAsset" type="Map"/>
+</aura:event>

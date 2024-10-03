@@ -1,0 +1,23 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction"
+                controller="A18_AC_AssetController"
+                access="global" >
+
+
+    <aura:handler name='init' action="{!c.init}" value="{!this}" />
+
+    <aura:attribute name="conList" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name='showRecordid' type='String' />
+
+
+    <!-- Lightning Datatale Start -->
+    <lightning:datatable aura:id="contactTable"
+                         data="{!v.conList}"
+                         columns="{!v.columns}"
+                         onsort="{!c.updateColumnSorting}"
+                         hideCheckboxColumn="false"
+                         onrowaction="{!c.handleRowAction}"
+                         keyField="id">
+    </lightning:datatable>
+
+</aura:component>

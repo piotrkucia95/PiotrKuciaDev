@@ -1,0 +1,66 @@
+<!--
+ - Created by Piotr Kucia on 04.08.18.
+ -->
+
+<aura:component description="A18_AssetTrackerAssetToUserForm">
+    <aura:attribute name="newAssetUser" type="Map" default=""/>
+    <aura:attribute name="assetUserAddedFlag" type="Boolean" default="false"/>
+    <aura:attribute name="assetUserErrorFlag" type="Boolean" default="false"/>
+    <aura:attribute name="assetFieldFlag" type="Boolean" default="true"/>
+    <aura:attribute name="selectedLookUpRecords1" type="sObject[]" default="[]"/>
+    <aura:attribute name="selectedLookUpRecords2" type="sObject[]" default="[]"/>
+
+    <aura:method name="handleAddAssetUser" action="{!c.handleAddAssetUser}" access="PUBLIC"></aura:method>
+    <aura:method name="handleEditAssetUser" action="{!c.handleEditAssetUser}" access="PUBLIC"></aura:method>
+    <aura:method name="handleCancel" action="{!c.clickCancel}" access="PUBLIC"></aura:method>
+    <aura:method name="notifySuccess" action="{!c.notifySuccess}" access="PUBLIC"></aura:method>
+    <aura:method name="notifyError" action="{!c.notifyError}" access="PUBLIC"></aura:method>
+
+    <aura:registerEvent name="addAssetUser" type="c:A18_AssetTrackerAddAssetUserEvent"/>
+    <aura:registerEvent name="editAssetUser" type="c:A18_AssetTrackerEditAssetUserEvent"/>
+
+    <aura:handler name="oSelectedAssetEvent" event="c:A18_AssetTrackerAssetSelectedEvent" action="{!c.handleAssetSelect}" includeFacets="true"/>
+    <aura:handler name="oSelectedUserEvent" event="c:A18_AssetTrackerUserSelectedEvent" action="{!c.handleUserSelect}" includeFacets="true"/>
+    <aura:handler name="assetClearedEvent" event="c:A18_AssetTrackerClearAssetEvent" action="{!c.handleClearAsset}"/>
+    <aura:handler name="userClearedEvent" event="c:A18_AssetTrackerClearUserEvent" action="{!c.handleClearUser}"/>
+
+    <h3 class="{!v.assetUserAddedFlag == true ? 'slds-text-color_success slds-text-align_center' : 'slds-assistive-text'}">
+        Asset To User added successfully!</h3>
+    <h3 class="{!v.assetUserErrorFlag == true ? 'slds-text-color_error slds-text-align_center' : 'slds-assistive-text'}">
+        Error occured! Make sure there are no empty fields.</h3>
+    <br/>
+    <form class="slds-form--stacked">
+        <lightning:input aura:id="assetuserform" label="Asset To User Name"
+                         name="assetusername"
+                         value="{!v.newAssetUser.name}"
+                         required="true"/>
+        <aura:if isTrue="{!v.assetFieldFlag == true}">
+            <!--<lightning:input aura:id="assetuserform" label="Asset ID"-->
+                             <!--name="assetuserasset"-->
+                             <!--value="{!v.newAssetUser.asset}"-->
+                             <!--required="true"/>-->
+            <c:A18_AssetTrackerMultSelectLookup objectAPIName="asset__c"
+                                                 IconName="custom:custom58"
+                                                 lstSelectedRecords="{!v.selectedLookUpRecords1}"
+                                                 label="Asset"/>
+            <c:A18_AssetTrackerMultSelectLookup objectAPIName="user"
+                                                 IconName="standard:user"
+                                                 lstSelectedRecords="{!v.selectedLookUpRecords2}"
+                                                 label="User"/>
+        </aura:if>
+        <lightning:input type="date" aura:id="assetuserform" label="Start Date"
+                         name="assetuserstartdate"
+                         value="{!v.newAssetUser.startDate}"/>
+        <lightning:input type="date" aura:id="assetuserform" label="End Date"
+                         name="assetuserenddate"
+                         value="{!v.newAssetUser.endDate}"/>
+        <lightning:select aura:id="assetuserform" name="assetuserstatus" label="Status" value="{!v.newAssetUser.status}">
+            <option>...</option>
+            <option value="Ready to delivery">Ready to delivery</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Service">Service</option>
+            <option value="Returned to store">Returned to store</option>
+            <option value="Destroyed">Destroyed</option>
+        </lightning:select>
+    </form>
+</aura:component>

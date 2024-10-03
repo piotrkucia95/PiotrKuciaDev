@@ -1,0 +1,12 @@
+/**
+ * Created by Piotr Kucia on 07.08.18.
+ */
+
+.THIS {
+}
+
+.THIS.main-content {
+    min-height: 87vh;
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/doodles.png');
+
+}

@@ -1,0 +1,7 @@
+<!--
+ - Created by Piotr Kucia on 05.08.18.
+ -->
+
+<aura:event type="COMPONENT" description="A18_AssetTrackerDeleteAssetEvent">
+    <aura:attribute name="assetId" type="String"/>
+</aura:event>

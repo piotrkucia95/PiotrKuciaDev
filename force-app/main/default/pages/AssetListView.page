@@ -1,0 +1,20 @@
+<!--
+ - Created by Piotr Kucia on 19.07.2018.
+ THIS PAGE USES STANDARD CONTROLLER FOR ASSET__C. PROPER PAGE SHOULD USE CUSTOM CONTROLLER AND DTO OBJECTS
+ -->
+
+<apex:page standardController="Asset__c" recordSetvar="assets" >
+    <apex:pageBlock title="Asset List">
+        <apex:form id="theForm">
+            <apex:pageBlockSection >
+                <apex:dataList var="a" value="{!assets}" type="1">
+                        {!a.Name}
+                </apex:dataList>
+            </apex:pageBlockSection>
+            <apex:panelGrid columns="2">
+                <apex:commandLink action="{!previous}">Previous</apex:commandlink>
+                <apex:commandLink action="{!next}">Next</apex:commandlink>
+            </apex:panelGrid>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,7 @@
+<!--
+ - Created by Polsource on 24.07.2018.
+ -->
+
+<aura:event type="COMPONENT" description="A18_AddAssentLDSEvent">
+    <aura:attribute name="newAsset" type="Map"/>
+</aura:event>

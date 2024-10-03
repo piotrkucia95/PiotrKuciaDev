@@ -1,0 +1,42 @@
+/**
+ * Created by Piotr Kucia on 30.07.2018.
+ */
+
+ .THIS {
+     margin-top: 5px;
+     text-align: right;
+     border-bottom: 1px solid #DDDDDD;
+ }
+
+.THIS img {
+    z-index: 99;
+    cursor: pointer;
+    position: relative;
+    min-width: 160px;
+    max-width: 100%;
+    max-height: 52px;
+    display: block;
+    outline: 0;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.THIS .actionMenu {
+    min-width: 100%;
+}
+
+.THIS .actionMenuItem {
+    margin-top: 5px;
+}
+
+.THIS .myclass {
+    display: none;
+}
+
+
+@media (max-width: 767px) {
+  .THIS .myclass {
+    display: block;
+  }
+}

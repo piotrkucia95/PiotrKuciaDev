@@ -1,0 +1,49 @@
+<!--
+ - Created by Piotr Kucia on 01.08.2018.
+ -->
+
+<aura:component description="A18_AssetTrackerRequestForm" implements="flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="newRequest" type="Object" default="{'Status__c' = 'New'}"/>
+    <aura:attribute name="simpleNewRequest" type="Object" default="{'Status__c' = 'New'}"/>
+    <aura:attribute name="newRequestError" type="String"/>
+    <aura:attribute name="requestAddedFlag" type="Boolean" default="false"/>
+    <aura:attribute name="priorityErrorFlag" type="Boolean" default="false"/>
+
+    <aura:method name="handleSaveRequest" action="{!c.handleSaveRequest}" access="PUBLIC"></aura:method>
+    <aura:method name="handleCancel" action="{!c.clickCancel}" access="PUBLIC"></aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <force:recordData aura:id="requestRecordCreator"
+                      layoutType="FULL"
+                      targetRecord="{!v.newRequest}"
+                      targetFields="{!v.simpleNewRequest}"
+                      targetError="{!v.newRequestError}" />
+
+    <h3 class="{!v.requestAddedFlag == true ? 'slds-text-color_success slds-text-align_center' : 'slds-assistive-text'}">
+        Request added successfully!</h3>
+    <br/>
+    <form class="slds-form--stacked">
+        <lightning:input aura:id="requestform" label="Request Name"
+                         name="requestname"
+                         value="{!v.simpleNewRequest.Name}"
+                         required="true"/>
+        <lightning:input aura:id="requestform" label="What"
+                         name="requestwhat"
+                         value="{!v.simpleNewRequest.What__c}"
+                         required="true"/>
+        <lightning:select name="requestform" label="Priority" value="{!v.simpleNewRequest.Priority__c}" required="true">
+            <option>...</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+        </lightning:select>
+        <p class="{!v.priorityErrorFlag == true ? 'slds-text-color_error' : 'slds-assistive-text'}">Pick priority!</p>
+        <lightning:input aura:id="requestform" label="Reason"
+                         name="requestreason"
+                         value="{!v.simpleNewRequest.Reason__c}" />
+    </form>
+
+
+</aura:component>

@@ -1,0 +1,74 @@
+<!--
+ - Created by Piotr Kucia on 05.08.18.
+ -->
+
+<aura:component description="A18_AssetTrackerAssetToUserList" controller="A18_AC_AssetUserController"
+                implements="forceCommunity:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="assetUsers" type="String[]"/>
+    <aura:attribute name="assetUserSearchPhrase" type="String" default=""/>
+    <aura:attribute name="changeFlag" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler name="change" value="{!v.changeFlag}" action="{!c.init}"/>
+    <aura:handler name="addAssetUser" event="c:A18_AssetTrackerAddAssetUserEvent" action="{!c.handleAddAssetUser}"/>
+    <aura:handler name="editAssetUser" event="c:A18_AssetTrackerEditAssetUserEvent" action="{!c.handleEditAssetUser}"/>
+    <aura:handler name="deleteAssetUser" event="c:A18_AssetTrackerDeleteAssetUserEvent" action="{!c.handleDeleteAssetUser}"/>
+
+    <div class="slds-grid">
+        <div class="slds-col slds-size--4-of-12 my-box">
+            <lightning:icon iconName="custom:custom9" class="slds-float--left"/>
+            <p class="slds-text-heading--medium">Assets To Users</p>
+        </div>
+        <div class="slds-col slds-size--5-of-12">
+            <lightning:input class="slds-float--left"
+                             aura:id="assetusersearch"
+                             label="Search Assets To Users"
+                             placeholder="Asset To User"
+                             name="searchphrase"
+                             variant="label-hidden"
+                             value="{!v.assetUserSearchPhrase}"/>
+            <aura:if isTrue="{!v.assetUserSearchPhrase != ''}">
+                <button class="slds-button slds-button_brand" onclick="{!c.assetUserSearch}">Search Assets</button>
+                <aura:set attribute="else">
+                    <button class="slds-button slds-button_brand" onclick="{!c.init}">Search Assets</button>
+                </aura:set>
+            </aura:if>
+        </div>
+        <div class="slds-col slds-size--3-of-12">
+            <button class="slds-button slds-button_brand slds-float_right" onclick="{!c.showModal}">Add Asset To User</button>
+        </div>
+    </div>
+
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+        <tr class="slds-text-title_caps">
+            <th scope="col">
+                <div class="slds-truncate" title="Name">Name</div>
+            </th>
+            <th scope="col" class="slds-max-small-hide">
+                <div class="slds-truncate" title="Asset">Asset</div>
+            </th>
+            <th scope="col" class="slds-max-small-hide">
+                <div class="slds-truncate" title="User">User</div>
+            </th>
+            <th scope="col" class="slds-max-medium-hide">
+                <div class="slds-truncate" title="Start Date">Start Date</div>
+            </th>
+            <th scope="col" class="slds-max-medium-hide">
+                <div class="slds-truncate" title="End Date">End Date</div>
+            </th>
+            <th scope="col" class="slds-max-x-small-hide">
+                <div class="slds-truncate" title="Status">Status</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <aura:iteration items="{!v.assetUsers}" var="assetUserJSON">
+            <c:A18_AssetTrackerAssetToUserListItem assetUserJSON="{!assetUserJSON}"/>
+        </aura:iteration>
+        </tbody>
+    </table>
+
+    <c:A18_AssetTrackerModal aura:id="assetUserModal" objectType="Asset To User" editFlag="false"/>
+
+</aura:component>

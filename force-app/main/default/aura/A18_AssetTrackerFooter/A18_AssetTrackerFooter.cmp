@@ -1,0 +1,7 @@
+<!--
+ - Created by Piotr Kucia on 31.07.2018.
+ -->
+
+<aura:component description="A18_AssetTrackerFooter">
+    <p class="slds-text-align--center">PolSource Academy 2018 Asset Tracker Community. All rights reserved! &copy;</p>
+</aura:component>

@@ -1,0 +1,6 @@
+<!--
+ - Created by pkucia on 09.08.18.
+ -->
+
+<aura:event type="COMPONENT" description="A18_AssetTrackerClearUserEvent">
+</aura:event>

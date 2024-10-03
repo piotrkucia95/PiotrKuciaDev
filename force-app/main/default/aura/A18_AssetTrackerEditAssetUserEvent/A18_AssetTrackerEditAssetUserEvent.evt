@@ -1,0 +1,7 @@
+<!--
+ - Created by pkucia on 06.08.18.
+ -->
+
+<aura:event type="COMPONENT" description="A18_AssetTrackerEditAssetUserEvent">
+    <aura:attribute name="newAssetUser" type="Map"/>
+</aura:event>

@@ -1,0 +1,51 @@
+<!--
+ - Created by Piotr Kucia on 01.08.2018.
+ -->
+
+<aura:component description="A18_AssetTrackerAssetList" controller="A18_AC_AssetController"
+                implements="forceCommunity:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="user" type="User" default="{
+        'Name': '',
+        'Id': '',
+        'Email': '' }"/>
+    <aura:attribute name="myAssets" type="String[]"/>
+
+    <aura:handler name="change" value="{!v.user}" action="{!c.handleUserChange}" />
+    <aura:handler event="c:A18_AssetTrackerUserInfoEvent" action="{!c.handleUserInfoEvent}"/>
+    <aura:handler name="assetBroken" event="c:A18_AssetTrackerAssetBrokenEvent" action="{!c.handleAssetBroken}"/>
+
+    <aura:if isTrue="{!v.myAssets[0] == null}">
+        <h1>You don't use any of the company's assets</h1>
+        <aura:set attribute="else">
+            <div class="slds-text-heading--small">You're currently using following assets. Mark 'Is Broken?' toggle to report any assets' faults and flaws.</div>
+
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate slds-max-x-small-hide" title="Description">Description</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate slds-max-small-hide" title="Due Date">Due Date</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate slds-max-small-hide" title="Purchase Date">Purchase Date</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Is Broken?">Is Broken?</div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <aura:iteration items="{!v.myAssets}" var="assetJSON">
+                    <c:A18_AssetTrackerEmployeeAssetListItem assetJSON="{!assetJSON}"/>
+                </aura:iteration>
+                </tbody>
+            </table>
+        </aura:set>
+    </aura:if>
+
+</aura:component>

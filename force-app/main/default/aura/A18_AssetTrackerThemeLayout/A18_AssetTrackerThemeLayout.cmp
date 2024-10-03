@@ -1,0 +1,15 @@
+<!--
+ - Created by Piotr Kucia on 30.07.2018.
+ -->
+
+<aura:component description="A18_AssetTrackerThemeLayout" implements="forceCommunity:themeLayout">
+    <div class="header">
+        <c:A18_AssetTrackerHeader />
+    </div>
+    <div class="slds-align--absolute-center main-content">
+            {!v.body}
+    </div>
+    <div class="footer slds-docked-form-footer slds-max-small-hide">
+        <c:A18_AssetTrackerFooter />
+    </div>
+</aura:component>

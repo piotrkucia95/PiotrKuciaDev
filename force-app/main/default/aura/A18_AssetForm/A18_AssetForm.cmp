@@ -1,0 +1,33 @@
+<!--
+ - Created by Piotr Kucia on 24.07.2018.
+ -->
+
+<aura:component description="A18_AssetForm">
+    <aura:attribute name="newAsset" type="Map" default=""/>
+
+    <div aria-labelledby="newassetform">
+        <form class="slds-form--stacked">
+            <lightning:input aura:id="assetform" label="Asset Name"
+                             name="assetname"
+                             value="{!v.newAsset.name}"
+                             required="true"/>
+            <lightning:input aura:id="assetform" label="Description"
+                             name="assetdescription"
+                             value="{!v.newAsset.description}"/>
+            <lightning:input type="date" aura:id="assetform" label="Due Date"
+                             name="assetduedate"
+                             value="{!v.newAsset.dueDate}"/>
+            <lightning:input aura:id="assetform" label="Invoice Number"
+                             name="assetinvoicenumber"
+                             value="{!v.newAsset.invoiceNumber}"/>
+            <lightning:input type="number" aura:id="assetform" label="Price"
+                             name="assetprice"
+                             formatter="currency"
+                             step="1"
+                             value="{!v.newAsset.price}" />
+            <lightning:input type="date" aura:id="assetform" label="Purchase Date"
+                             name="assetpurchasedate"
+                             value="{!v.newAsset.purchaseDate}"/>
+        </form>
+    </div>
+</aura:component>

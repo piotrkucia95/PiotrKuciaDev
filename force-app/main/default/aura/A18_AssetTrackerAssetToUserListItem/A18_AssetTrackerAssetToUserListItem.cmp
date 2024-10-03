@@ -1,0 +1,59 @@
+<!--
+ - Created by Piotr Kucia on 05.08.18.
+ -->
+
+<aura:component description="A18_AssetTrackerAssetToUserListItem">
+    <aura:attribute name="assetUserJSON" type="String"/>
+    <aura:attribute name="assetUser" type="Object"/>
+
+    <aura:attribute name="editModalVisible" type="Boolean" default="false"/>
+    <aura:attribute name="deleteModalVisible" type="Boolean" default="false"/>
+    <aura:attribute name="assetUserDeletedFlag" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:registerEvent name="deleteAssetUser" type="c:A18_AssetTrackerDeleteAssetUserEvent"/>
+
+    <tr>
+        <th data-label="Name">
+            <div class="slds-truncate slds-cell-wrap"><a href="{!$Site.siteUrlPrefix + '/detail/' + v.assetUser.id}">{!v.assetUser.name}</a></div>
+        </th>
+        <th data-label="Asset ID" class="slds-max-small-hide">
+            <div class="slds-truncate">{!v.assetUser.asset}</div>
+        </th>
+        <td data-label="User ID" class="slds-max-small-hide">
+            <div class="slds-truncate">{!v.assetUser.user}</div>
+        </td>
+        <td data-label="Start Date" class="slds-max-medium-hide">
+            <div class="slds-truncate">{!v.assetUser.startDate}</div>
+        </td>
+        <td data-label="End Date" class="slds-max-medium-hide">
+            <div class="slds-truncate">{!v.assetUser.endDate}</div>
+        </td>
+        <td data-label="Status" class="slds-max-x-small-hide">
+            <div class="slds-truncate">{!v.assetUser.status}</div>
+        </td>
+        <td data-label="Action">
+            <div class="slds-button-group" role="group">
+                <button class="slds-button slds-button_neutral" onclick="{!c.showEditModal}">Edit</button>
+                <button class="slds-button slds-button_neutral" onclick="{!c.showDeleteModal}">Delete</button>
+            </div>
+        </td>
+    </tr>
+
+    <c:A18_AssetTrackerModal objectType="Asset To User" object="{!v.assetUser}" modalVisible="{!v.editModalVisible}" editFlag="true"/>
+    <aura:if isTrue="{!v.deleteModalVisible}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Are you sure?</h2>
+                    <h3 class="{!v.assetUserDeletedFlag == true ? 'slds-text-color_success slds-text-align_center' : 'slds-assistive-text'}">
+                        Asset To User deleted successfully!</h3>
+                    <br/>
+                    <button class="slds-button slds-button_brand" onclick="{!c.deleteAssetUser}">Delete</button>
+                    <button class="slds-button slds-button_brand" onclick="{!c.showDeleteModal}">Cancel</button>
+                </header>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,72 @@
+<!--
+ - Created by Piotr Kucia on 30.07.2018.
+ -->
+
+<aura:component description="A18_AssetTrackerHeader" controller="A18_AC_AssetController" implements="forceCommunity:availableForAllPageTypes,force:appHostable">
+    <aura:attribute name="userWrapper" type="Map" default="{'userType': '',
+                                                            'user': null}"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler name="change" value="{!v.userWrapper}" action="{!c.handleUserWrapperChange}" />
+    <aura:registerEvent name="userEvent" type="c:A18_AssetTrackerUserInfoEvent"/>
+
+    <div class="slds-grid slds-gutters slds-align--absolute-center">
+        <div class="{!v.userWrapper.userType == 'Employee' ? 'slds-col slds-size--5-of-12' : 'slds-col slds-size--2-of-12'}">
+            <a href="../s"><img src="{!$Resource.logo}" /></a>
+        </div>
+        <div class="slds-col slds-size--1-of-12 slds-max-small-hide">
+        </div>
+        <div class="slds-col slds-size--1-of-12 slds-max-small-hide">
+            <p class="slds-text-heading--small"><a href="https://pkucia-developer-edition.eu10.force.com/AssetTrackerCommunity">Home</a></p>
+        </div>
+        <div class="slds-col slds-size--1-of-12 slds-max-small-hide">
+            <p class="slds-text-heading--small"><a href="https://pkucia-developer-edition.eu10.force.com/AssetTrackerCommunity/s/my-assets">My Assets</a></p>
+        </div>
+        <aura:if isTrue="{!(v.userWrapper.userType == 'Asset Coordinator' || v.userWrapper.userType == 'Asset Admin')}">
+            <div class="slds-col slds-size--1-of-12 slds-max-small-hide">
+                <p class="slds-text-heading--small"><a href="https://pkucia-developer-edition.eu10.force.com/AssetTrackerCommunity/s/assets">Assets</a></p>
+            </div>
+
+            <div class="slds-col slds-size--1-of-12 slds-max-small-hide">
+                <p class="slds-text-heading--small"><a href="https://pkucia-developer-edition.eu10.force.com/AssetTrackerCommunity/s/assets-to-users">Assets To Users</a></p>
+            </div>
+
+            <div class="slds-col slds-size--1-of-12 slds-max-small-hide">
+                <p class="slds-text-heading--small"><a href="https://pkucia-developer-edition.eu10.force.com/AssetTrackerCommunity/s/requests">Requests</a></p>
+            </div>
+        </aura:if>
+
+        <div class="slds-col slds-size--1-of-12 slds-max-small-hide">
+            <ui:menu>
+                <ui:menuTriggerLink class="slds-text-heading--small" aura:id="trigger">Options</ui:menuTriggerLink>
+                <ui:menuList class="actionMenu slds-text-align--center" aura:id="actionMenu">
+                    <ui:actionMenuItem aura:id="item1" label="Go to Salesforce" click="{!c.goToSalesforce}"/>
+                    <ui:actionMenuItem aura:id="item2" label="Go to PolSource website" click="{!c.goToPolsource}"/>
+                    <ui:actionMenuItem aura:id="item3" label="Log Out" click="{!c.logOut}"/>
+                </ui:menuList>
+            </ui:menu>
+        </div>
+        <div class="slds-col slds-size--3-of-12 slds-max-small-hide">
+            <c:A18_AssetTrackerUserInfo user="{!v.userWrapper.user}" userType="{!v.userWrapper.userType}"/>
+        </div>
+
+        <div class="{!v.userWrapper.userType == 'Employee' ? 'slds-col slds-size--2-of-12 slds-col myclass' : 'slds-col slds-size--5-of-12 slds-col myclass'}"></div>
+
+        <div class="slds-col slds-size--5-of-12 slds-col myclass">
+            <ui:menu>
+                <ui:menuTriggerLink class="slds-text-heading--medium triggerLink" aura:id="trigger"><h1>MENU</h1></ui:menuTriggerLink>
+                <ui:menuList class="actionMenu slds-text-align--center ql-align-right" aura:id="actionMenu">
+                    <ui:actionMenuItem class="actionMenuItem" aura:id="item1" label="Home" click="{!c.goHome}"/>
+                    <ui:actionMenuItem class="actionMenuItem" aura:id="item2" label="My Assets" click="{!c.goMyAssets}"/>
+                    <aura:if isTrue="{!(v.userWrapper.userType == 'Asset Coordinator' || v.userWrapper.userType == 'Asset Admin')}">
+                        <ui:actionMenuItem class="actionMenuItem" aura:id="item3" label="Assets" click="{!c.goAssets}"/>
+                        <ui:actionMenuItem class="actionMenuItem" aura:id="item4" label="Assets to Users" click="{!c.goAssetUsers}"/>
+                        <ui:actionMenuItem class="actionMenuItem" aura:id="item5" label="Requests" click="{!c.goRequests}"/>
+                    </aura:if>
+                    <ui:actionMenuItem class="actionMenuItem" aura:id="item6" label="Log out" click="{!c.logOut}"/>
+                </ui:menuList>
+            </ui:menu>
+        </div>
+    </div>
+
+</aura:component>

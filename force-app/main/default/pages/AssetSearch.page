@@ -1,0 +1,49 @@
+<!--
+ - Created by Piotr Kucia on 19.07.2018.
+ -->
+
+<apex:page controller="A18_VFC_AssetController">
+    <apex:form >
+        <apex:pageBlock mode="edit" id="block" title="Asset Search">
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="searchText">Search Text</apex:outputLabel>
+                    <apex:panelGroup >
+                        <apex:inputText id="searchText" value="{!searchText}"/>
+                        <apex:commandButton value="Go!" action="{!doSearch}"
+                                            rerender="block" status="status"/>
+                    </apex:panelGroup>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:actionStatus id="status" startText="requesting..."/>
+            <apex:pageBlockSection title="Results" id="results" columns="1">
+
+                <apex:pageBlockTable value="{!results}" var="r" rendered="{!NOT(ISNULL(results))}">
+                    <apex:column headerValue="Name">
+                        <apex:outputText value="{!r.name}" />
+                    </apex:column>
+                    <apex:column headerValue="Description">
+                        <apex:outputText value="{!r.description}" />
+                    </apex:column>
+                    <apex:column headerValue="Due Date">
+                        <apex:outputText value="{0,date,MM/dd/yyyy}" >
+                            <apex:param value="{!r.dueDate}" />
+                        </apex:outputText>
+                    </apex:column>
+                    <apex:column headerValue="Invoice Number">
+                        <apex:param value="{!r.invoiceNumber}" />
+                    </apex:column>
+                    <apex:column headerValue="Price">
+                        <apex:param value="{!r.price}" />
+                    </apex:column>
+                    <apex:column headerValue="Purchase Date">
+                        <apex:outputText value="{0,date,MM/dd/yyyy}" >
+                            <apex:param value="{!r.purchaseDate}" />
+                        </apex:outputText>
+                    </apex:column>
+
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
